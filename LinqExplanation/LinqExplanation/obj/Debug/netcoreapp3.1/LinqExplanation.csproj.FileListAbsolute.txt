@@ -1,0 +1,13 @@
+C:\WIP\Training\LinqExplanation\LinqExplanation\bin\Debug\netcoreapp3.1\LinqExplanation.exe
+C:\WIP\Training\LinqExplanation\LinqExplanation\bin\Debug\netcoreapp3.1\LinqExplanation.deps.json
+C:\WIP\Training\LinqExplanation\LinqExplanation\bin\Debug\netcoreapp3.1\LinqExplanation.runtimeconfig.json
+C:\WIP\Training\LinqExplanation\LinqExplanation\bin\Debug\netcoreapp3.1\LinqExplanation.runtimeconfig.dev.json
+C:\WIP\Training\LinqExplanation\LinqExplanation\bin\Debug\netcoreapp3.1\LinqExplanation.dll
+C:\WIP\Training\LinqExplanation\LinqExplanation\bin\Debug\netcoreapp3.1\LinqExplanation.pdb
+C:\WIP\Training\LinqExplanation\LinqExplanation\obj\Debug\netcoreapp3.1\LinqExplanation.csprojAssemblyReference.cache
+C:\WIP\Training\LinqExplanation\LinqExplanation\obj\Debug\netcoreapp3.1\LinqExplanation.AssemblyInfoInputs.cache
+C:\WIP\Training\LinqExplanation\LinqExplanation\obj\Debug\netcoreapp3.1\LinqExplanation.AssemblyInfo.cs
+C:\WIP\Training\LinqExplanation\LinqExplanation\obj\Debug\netcoreapp3.1\LinqExplanation.csproj.CoreCompileInputs.cache
+C:\WIP\Training\LinqExplanation\LinqExplanation\obj\Debug\netcoreapp3.1\LinqExplanation.dll
+C:\WIP\Training\LinqExplanation\LinqExplanation\obj\Debug\netcoreapp3.1\LinqExplanation.pdb
+C:\WIP\Training\LinqExplanation\LinqExplanation\obj\Debug\netcoreapp3.1\LinqExplanation.genruntimeconfig.cache
