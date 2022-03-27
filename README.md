@@ -13,6 +13,15 @@ var filteredInvoices = invoices.Where(x=>x.InvoiceValue >2000);
 /* Proszęęęęę */
 ```
   Proste. Większość początkujących developerów da sobie radę z tak postawionym problemem. Spora część z nich, wykona to jednak bezrefleksyjnie, nie dokońca rozumiejąc w pełni zastosowaną składnię.  Jak to się dzieje że używamy jakiejś metody ‘Where’ na naszej liście faktur? Przecież nigdzie nie deklarowaliśmy jej na żadnej klasie. Co to za dziwna konstrukcja z tymi ‘x’ i jakimiś dziwnymi strzałkami ? Wiem, że tak to się robi, ale dlaczego, co tu się właściwie wydarzyło ?
+  
+  Przez to że LINQ jest tak powszechne i każdy programista .NET styka się z nim już na samym początku swojej drogi, jest to dobry element do wyjaśnienia pewnych konceptów, które podczas poznawania C# mogły zostać potraktowane trochę po macoszemu. Będą więc tutaj rozkminiane:
+•	Delegaty
+•	Delegaty generyczne
+•	Wyrażenia lambda
+•	Metody rozszerzające
+
+ Przy okazji możemy też wspomnień coś więcej ogólnie o klasach generycznych na przykładzie generycznych kolekcji i nieco rozjaśnić idee magicznego interfejsu IEnumerable.
 
   Zapomnijmy na moment, że mamy do dyspozycji LINQ. Spróbujmy napisać nasze własne uproszczone implementacje tej biblioteki, przechodząc krok po kroku przez różne bariery. Tłumaczenie może być mocno łopatologiczne  ale taki nietypowy sposób wybrałem na wyjaśnienie tematu.
+  
   
