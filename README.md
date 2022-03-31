@@ -27,6 +27,7 @@ var filteredInvoices = invoices.Where(x=>x.InvoiceValue >2000);
   ### Projekt
   Podczas omawiania problemu, przykładowy projekt i klasy wchodzące w jego skład warto budować stopniowo, krok po kroku wszystko wyjaśniając.
   Finalny Projekt będzie wyglądał tak:
+  
   ![Solucja](IMG/Solution.PNG)
   
   Co zawierają poszczególne foldery i klasy?
