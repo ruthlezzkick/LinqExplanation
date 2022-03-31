@@ -128,6 +128,45 @@ var filteredInvoices = invoices.Where(x=>x.InvoiceValue >2000);
     var clInvoicesWithBeer = ConstLinq.WhereInvoiceHasBeer(invoices);
     var clWarsawInvoices = ConstLinq.WhereInvoiceCityIsEqualWarsaw(invoices);
 ```
+### Krok 3
+Czas na delegaty. Utwórzmy kolejną klasę statyczną InvoiceLinq, w której zamiast osobnych metod na każdą ewentualność, czyli filtracje faktur po mieście, po produkcie, po dacie, po sklepie itp, , będziemy mieli jedną uniwersalną metodę. Dalej będzie ona operowała tylko na kolekcji faktur i żadnej innej, ale warunek sprawdzania pojedynczej faktury stanie się bardziej uniwersalny.
+```csharp
+public static class InvoiceLinq
+    {
+        public delegate bool CheckIfConditionIsTrue(Invoice invoice);
+        //Func<Invoice,bool>
+        
+        public static IEnumerable<Invoice> Where(IEnumerable<Invoice> invoices, CheckIfConditionIsTrue checkIfConditionIsTrue)
+        {
+            var resultList = new List<Invoice>();
+            foreach (var invoice in invoices)
+            {
+                if(checkIfConditionIsTrue(invoice))
+                {
+                    resultList.Add(invoice);
+                }
+            }
+            return resultList;
+        }
+
+        public static IEnumerable<Invoice> WhereByFunc(IEnumerable<Invoice> invoices, Func<Invoice,bool> invoiceDelegate)
+        {
+            var resultList = new List<Invoice>();
+            foreach (var invoice in invoices)
+            {
+                if (invoiceDelegate(invoice))
+                {
+                    resultList.Add(invoice);
+                }
+            }
+            return resultList;
+        }
+    }
+```
+
+    
+
+
 
     
     
