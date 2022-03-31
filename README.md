@@ -180,6 +180,45 @@ var result2 = InvoiceLinq.Where(invoices, del2);
 Mam nadzieję , że idea delegat została już co nieco wyjaśniona. To w pewnym sensie wzorzec dla metody. Deklarując delegatę, mówimy, że pasuje do niej każda metoda, która daje wynik tego samego typu i przyjmuje parametry tego samego typu co nasz wzorzec.
 ### krok 4
 Czas na wyrażenia Lambda.
+Weźmy na tapetę jedną z metod spełniającą regóły naszej delegaty, i pstarajmy się nieco ją uprościć
+```csharp
+public static bool IsCityEqualWarszawa(Invoice invoice)
+ {
+     if (invoice.City == "Warszawa")
+     {
+         return true;
+     }
+     return false;
+ }
+```
+Po kolei:
+- zmieńmy ciało tej metody na ternary operator, a nastepnie upraszczając jeszcze bardziej, zostawmy to po prostu wyrażeniem logicznym
+```csharp
+return (invoice.City=="Warszawa") ? true: false
+```
+```csharp
+return invoice.City=="Warszawa"
+```
+- zastapmy klamry strzałką =>
+- usuńmy kwantyfikator dostepu public i słowo static
+- usuńmy słowo return
+- usuńmy typ i nazwę metody
+- usuńmy typ parametru Invoice
+- skóćmy nazwę zmiennej invoice np. do x
+- usuńmy nawiasy okalające parametr naszej metody
+W efekcie otrzymamy:
+```csharp
+x=>x.City=="Warszawa"
+```
+Co prawda nie da się zapisać takiego kodu gdzieś luzem, ale możemy już go wstawić do naszej metody Where w klasie InvoiceLinq w miejsce parametru delegaty.
+```csharp
+var result3 = InvoiceLinq.Where(invoices, x => x.City == "Warszawa");
+```
+Acha ...Mieliśmy już nie używać klasycznych delegat, więc spróbujmy to samo z delegatą generyczną Func
+```csharp
+var result4 = InvoiceLinq.WhereByFunc(invoices, x => x.City == "Warszawa");
+```
+
 
 
        
