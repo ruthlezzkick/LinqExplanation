@@ -84,6 +84,47 @@ var filteredInvoices = invoices.Where(x=>x.InvoiceValue >2000);
   ```
   Na wszelki wypadek szybkie wyjaśnienie co tu się zadziało. Iterujemy po każdej fakturze w kolekcji. Dla każdej faktury iterujemy po każdej pozycji. Sprawdzamy czy nazwa pozycji to piwo. Jeśli tak to przerywamy tą niższą iterację i przechodzimy do sprawdzania kolejnej faktury. Oczywiście Piwo na pozycji powoduje dodanie faktury do nowej wynikowej kolekcji.
   ### Krok 2
-   
+  Stwórzmy statyczną klasę ConstLinq z dwiema metodami, które zrobią dokładnie to co nasze iteracje wyżej. Czyli tak naprawdę opakujmy ten kod w osobne metody.
+  ```csharp
+  public static class ConstLinq
+    {
+        public static IEnumerable<Invoice> WhereInvoiceCityIsEqualWarsaw(IEnumerable<Invoice> invoices)
+        {
+            var resultList = new List<Invoice>();
+            foreach (var invoice in invoices)
+            {
+                if (invoice.City == "Warszawa")
+                {
+                    resultList.Add(invoice);
+                }
+            }
+            return resultList;
+        }
+
+        public static IEnumerable<Invoice> WhereInvoiceHasBeer(IEnumerable<Invoice> invoices)
+        {
+            var resultList = new List<Invoice>();
+            foreach (var invoice in invoices)
+            {
+                foreach (var invoiceItem in invoice.InvoiceItems)
+                {
+                    if (invoiceItem.ItemName == "Beer")
+                    {
+                        resultList.Add(invoice);
+                        break;
+                    }
+                }
+            }
+            return resultList;
+        }
+    }
+    ```
+    Wywołanie tych metod na naszej pierwszej pseudo klasie LINQ będzie wyglądało tak:
+    Metody przyjmują w parametrze pełne kolekcje a zwracają już pofiltrowane
+    ```csharp
+    var clInvoicesWithBeer = ConstLinq.WhereInvoiceHasBeer(invoices);
+    var clWarsawInvoices = ConstLinq.WhereInvoiceCityIsEqualWarsaw(invoices);
+    ```
+    
   
   
