@@ -40,13 +40,13 @@ var filteredInvoices = invoices.Where(x=>x.InvoiceValue >2000);
   
   ### Main
   W metodzie Main naszego programu tworzymy przykładowe kolekcje
-   ```csharp 
+  ```csharp 
   var invoices = DomainFactory.FakeInvoiceList();
   var drivers = DomainFactory.FakeDriverList();
   ```
   ### Krok 0
   Na rozgrzewkę wykonajmy na nich kilka filtrowań za pomocą metody Where z oryginalnego LINQ
-   ```csharp 
+  ```csharp 
   var linqWarsawInvoices = invoices.Where(x=>x.City=="Warszawa");
   var linqAprilInvoices = invoices.Where(x => x.CrtDate.Month==4);
   var linqInvoicesWithValueMoreThan30 = invoices.Where(x => x.Value>30);
@@ -57,7 +57,7 @@ var filteredInvoices = invoices.Where(x=>x.InvoiceValue >2000);
   ### Krok 1
   Cofnijmy się nieco w czasie do roku 2007. Nie został jeszcze wydany VS 2008 z C# 3.0 i .Net Framework 3.5. Nie  dysponujemy jeszcze technologią LINQ.  Spróbujmy zwrócić listę faktur na Warszawę.
   Bez zbędnych wyjaśnień, najprościej zrobimy to tak:
-    ```csharp 
+  ```csharp 
   var warsawInvoices = new List<Invoice>();
    foreach (var invoice in invoices)
    {
@@ -66,9 +66,9 @@ var filteredInvoices = invoices.Where(x=>x.InvoiceValue >2000);
            warsawInvoices.Add(invoice);
        }
    }
-  ```
+   ```
   I jeszcze trochę bardziej złożony przykład. Zwróćmy te faktury, które w swoich pozycjach zawierają piwo.
-    ```csharp 
+  ```csharp 
   var invoicesWithBeer = new List<Invoice>();
   foreach (var invoice in invoices)
   {
