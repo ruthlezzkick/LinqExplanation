@@ -214,12 +214,21 @@ Co prawda nie da się zapisać takiego kodu gdzieś luzem, ale możemy już go w
 ```csharp
 var result3 = InvoiceLinq.Where(invoices, x => x.City == "Warszawa");
 ```
+Spróbujmy jednak taki zapis lambda przypisać do zmiennej i użyć w metodzie tą zmienną:
+```csharp
+InvoiceLinq.CheckIfConditionIsTrue del5a = x => x.City == "Warszawa";
+var result5a = InvoiceLinq.Where(invoices, del5a);
+```           
 Acha ...Mieliśmy już nie używać klasycznych delegat, więc spróbujmy to samo z delegatą generyczną Func
 ```csharp
 var result4 = InvoiceLinq.WhereByFunc(invoices, x => x.City == "Warszawa");
 ```
-
-
+i jeszcze jako zmienna:
+```csharp
+Func<Invoice,bool> del5b = x => x.City == "Warszawa";
+var result5b = InvoiceLinq.WhereByFunc(invoices, del5b);
+```   
+### krok 5
 
        
 
