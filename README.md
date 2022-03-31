@@ -38,4 +38,52 @@ var filteredInvoices = invoices.Where(x=>x.InvoiceValue >2000);
   - Klasa Program - tutaj odbywają się wszelkie testy budowanych mechanizmów
   - Folder AltLinq - tutaj stopniowo budujemy alternatywne wersje dla naszego LINQ
   
+  ### Main
+  W metodzie Main naszego programu tworzymy przykładowe kolekcje
+   ```csharp 
+  var invoices = DomainFactory.FakeInvoiceList();
+  var drivers = DomainFactory.FakeDriverList();
+  ```
+  ### Krok 0
+  Na rozgrzewkę wykonajmy na nich kilka filtrowań za pomocą metody Where z oryginalnego LINQ
+   ```csharp 
+  var linqWarsawInvoices = invoices.Where(x=>x.City=="Warszawa");
+  var linqAprilInvoices = invoices.Where(x => x.CrtDate.Month==4);
+  var linqInvoicesWithValueMoreThan30 = invoices.Where(x => x.Value>30);
+  var linqAuchanInvoices = invoices.Where(x => x.Customer=="Auchan");
+  var linqInvoicesWithBeer = invoices.Where(x => x.InvoiceItems.Any(y => y.ItemName == "Beer"));
+  ```
+  Nie będziemy wyświetlać wyników w konsoli, ale zapewniam, że wynikowe kolekcje zawierają wyniki zgodne z intencją.
+  ### Krok 1
+  Cofnijmy się nieco w czasie do roku 2007. Nie został jeszcze wydany VS 2008 z C# 3.0 i .Net Framework 3.5. Nie  dysponujemy jeszcze technologią LINQ.  Spróbujmy zwrócić listę faktur na Warszawę.
+  Bez zbędnych wyjaśnień, najprościej zrobimy to tak:
+    ```csharp 
+  var warsawInvoices = new List<Invoice>();
+   foreach (var invoice in invoices)
+   {
+       if (invoice.City == "Warszawa")
+       {
+           warsawInvoices.Add(invoice);
+       }
+   }
+  ```
+  I jeszcze trochę bardziej złożony przykład. Zwróćmy te faktury, które w swoich pozycjach zawierają piwo.
+    ```csharp 
+  var invoicesWithBeer = new List<Invoice>();
+  foreach (var invoice in invoices)
+  {
+      foreach (var invoiceItem in invoice.InvoiceItems)
+      {
+          if (invoiceItem.ItemName == "Beer")
+          {
+              invoicesWithBeer.Add(invoice);
+              break;
+          }
+      }
+  }
+  ```
+  Na wszelki wypadek szybkie wyjaśnienie co tu się zadziało. Iterujemy po każdej fakturze w kolekcji. Dla każdej faktury iterujemy po każdej pozycji. Sprawdzamy czy nazwa pozycji to piwo. Jeśli tak to przerywamy tą niższą iterację i przechodzimy do sprawdzania kolejnej faktury. Oczywiście Piwo na pozycji powoduje dodanie faktury do nowej wynikowej kolekcji.
+  ### Krok 2
+   
+  
   
