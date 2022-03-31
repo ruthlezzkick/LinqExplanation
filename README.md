@@ -163,6 +163,12 @@ public static class InvoiceLinq
         }
     }
 ```
+W górnej części naszej klasy pojawia się nowy byt. Deklaracja delegaty. To w pewnym sensie deklaracja jakiejś dowolnej metody, która jako parametr przyjmie klasę Invoice i zwróci wynik typu bool. Nie interesuje nas ciało i logika tych metod. Jedyną zasadą jakie muszą spełniać to ten parametr i rezultat.
+
+Metoda Where w tej klasie zwróci nam kolekcję faktur, ale jako parametry musi przyjąć (pełną)kolekcję faktur i jakąś dowolna metodę, która spełnia kryteria określone w naszej delegacie.  W ciele tej metody widać, że na każdej fakturze w kolekcji faktur będzie wykonywana ta metoda i jeśli zwróci True, to taką fakturę dodajemy do naszej kolekcji wynikowej.
+
+Tak na prawdę klasyczne delegaty jakiej tu użyliśmy straciły już dawno sens. Po co nazywać i deklarować za każdym razem taką delegatę, skoro wydaje się , że jest ich skończona ilość. Odpowiedniki wszelkich metod void możemy zastąpić przez generyczną delegatę Action, która może przyjąć parametry od 0 do 17, różnego typu. Podobnie jest z metodami, które zwracają jakiś wynik. Generyczna Delegata Func, może przyjmować równie dużą ilość parametrów, zwracając jeden. W naszym przykładzie możemy zastąpić klasyczną delegatę public delegate bool CheckIfConditionIsTrue(Invoice invoice) przez delegatę generyczną Func<Invoice,bool> i tym samym pominąć element jej deklaracji. metoda WhereByFunc robi dokładnie to co metoda Where, ale bazuje właśnie na delegacie generycznej.
+
 
     
 
