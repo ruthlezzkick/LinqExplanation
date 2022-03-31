@@ -118,14 +118,17 @@ var filteredInvoices = invoices.Where(x=>x.InvoiceValue >2000);
             return resultList;
         }
     }
-    ```
+  ```
+  
     
     Wywołanie tych metod na naszej pierwszej pseudo klasie LINQ będzie wyglądało tak:
     Metody przyjmują w parametrze pełne kolekcje a zwracają już pofiltrowane
-    ```csharp
+```csharp
+
     var clInvoicesWithBeer = ConstLinq.WhereInvoiceHasBeer(invoices);
     var clWarsawInvoices = ConstLinq.WhereInvoiceCityIsEqualWarsaw(invoices);
-    ```
+```
+
     
     
   
