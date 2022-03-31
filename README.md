@@ -31,6 +31,7 @@ var filteredInvoices = invoices.Where(x=>x.InvoiceValue >2000);
   ![Solucja](IMG/Solution.PNG)
   
   Co zawierają poszczególne foldery i klasy?
+  
   -Folder Domain - zawiera przykładowe klasy naszych kolekcji
   -Klasa DomainFactory - to kreator przykładowych kolekcji tych klas
   -Klasa Helper - to klasa, w której umieściliśmy kilka pomocniczych metod. Głównie do wyswietlania wyników w konsoli, ale też przykładowe metody zwracające wartość bool dla parametru Invoice
