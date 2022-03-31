@@ -169,6 +169,21 @@ Metoda Where w tej klasie zwróci nam kolekcję faktur, ale jako parametry musi 
 
 Tak na prawdę klasyczne delegaty jakiej tu użyliśmy straciły już dawno sens. Po co nazywać i deklarować za każdym razem taką delegatę, skoro wydaje się , że jest ich skończona ilość. Odpowiedniki wszelkich metod void możemy zastąpić przez generyczną delegatę Action, która może przyjąć parametry od 0 do 17, różnego typu. Podobnie jest z metodami, które zwracają jakiś wynik. Generyczna Delegata Func, może przyjmować równie dużą ilość parametrów, zwracając jeden. W naszym przykładzie możemy zastąpić klasyczną delegatę public delegate bool CheckIfConditionIsTrue(Invoice invoice) przez delegatę generyczną Func<Invoice,bool> i tym samym pominąć element jej deklaracji. metoda WhereByFunc robi dokładnie to co metoda Where, ale bazuje właśnie na delegacie generycznej.
 
+Zostańmy ostatni raz przy starym podejściu i klasycznych delegatach. W naszej aplikacji Program, mamy kod deklarujący delegatę, przypisujący do niej jakąś metodę z naszego Helpera, spełniającą warunki sygnatury tej delegaty, a następnie wywołanie metody Where, gdzie jednym z parametrów jest właśnie przekazana metoda naszego helpera w miejsce delegaty.
+```csharp
+InvoiceLinq.CheckIfConditionIsTrue del1 = Helper.IsCityEqualWarszawa;
+var result1 = InvoiceLinq.Where(invoices, del1);
+
+InvoiceLinq.CheckIfConditionIsTrue del2 = Helper.IsIdLessThanTree;
+var result2 = InvoiceLinq.Where(invoices, del2);
+```
+Mam nadzieję , że idea delegat została już co nieco wyjaśniona. To w pewnym sensie wzorzec dla metody. Deklarując delegatę, mówimy, że pasuje do niej każda metoda, która daje wynik tego samego typu i przyjmuje parametry tego samego typu co nasz wzorzec.
+### krok 4
+Czas na wyrażenia Lambda.
+
+
+       
+
 
     
 
