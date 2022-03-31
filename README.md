@@ -24,4 +24,16 @@ var filteredInvoices = invoices.Where(x=>x.InvoiceValue >2000);
 
   Zapomnijmy na moment, że mamy do dyspozycji LINQ. Spróbujmy napisać nasze własne uproszczone implementacje tej biblioteki, przechodząc krok po kroku przez różne bariery. Tłumaczenie może być mocno łopatologiczne  ale taki nietypowy sposób wybrałem na wyjaśnienie tematu.
   
+  ###Projekt
+  Podczas omawiania problemu, przykładowy projekt i klasy wchodzące w jego skład warto budować stopniowo, krok po kroku wszystko wyjaśniając.
+  Finalny Projekt będzie wyglądał tak:
+  ![Solucja](IMG/Solution.PNG)
+  
+  Co zawierają poszczególne foldery i klasy?
+  -Folder Domain - zawiera przykładowe klasy naszych kolekcji
+  -Klasa DomainFactory - to kreator przykładowych kolekcji tych klas
+  -Klasa Helper - to klasa, w której umieściliśmy kilka pomocniczych metod. Głównie do wyswietlania wyników w konsoli, ale też przykładowe metody zwracające wartość bool dla parametru Invoice
+  -Klasa Program - tutaj odbywają się wszelkie testy budowanych mechanizmów
+  -Folder AltLinq - tutaj stopniowo budujemy alternatywne wersje dla naszego LINQ
+  
   
