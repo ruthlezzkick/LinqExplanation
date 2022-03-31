@@ -178,7 +178,7 @@ InvoiceLinq.CheckIfConditionIsTrue del2 = Helper.IsIdLessThanTree;
 var result2 = InvoiceLinq.Where(invoices, del2);
 ```
 Mam nadzieję , że idea delegat została już co nieco wyjaśniona. To w pewnym sensie wzorzec dla metody. Deklarując delegatę, mówimy, że pasuje do niej każda metoda, która daje wynik tego samego typu i przyjmuje parametry tego samego typu co nasz wzorzec.
-### krok 4
+### Krok 4
 Czas na wyrażenia Lambda.
 Weźmy na tapetę jedną z metod spełniającą regóły naszej delegaty, i pstarajmy się nieco ją uprościć
 ```csharp
@@ -228,7 +228,7 @@ i jeszcze jako zmienna:
 Func<Invoice,bool> del5b = x => x.City == "Warszawa";
 var result5b = InvoiceLinq.WhereByFunc(invoices, del5b);
 ```   
-### krok 5
+### Krok 5
 
        
 
