@@ -24,7 +24,7 @@ var filteredInvoices = invoices.Where(x=>x.InvoiceValue >2000);
 
   Zapomnijmy na moment, że mamy do dyspozycji LINQ. Spróbujmy napisać nasze własne uproszczone implementacje tej biblioteki, przechodząc krok po kroku przez różne bariery. Tłumaczenie może być mocno łopatologiczne  ale taki nietypowy sposób wybrałem na wyjaśnienie tematu.
   
-  ###Projekt
+  ### Projekt
   Podczas omawiania problemu, przykładowy projekt i klasy wchodzące w jego skład warto budować stopniowo, krok po kroku wszystko wyjaśniając.
   Finalny Projekt będzie wyglądał tak:
   ![Solucja](IMG/Solution.PNG)
