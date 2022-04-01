@@ -284,7 +284,34 @@ Wszystko działa świetnie. Dodam tylko, że w obu powyższych fragmentach kodu 
 var result6 = MyGenericLinq.GenericWhere(invoices, del6); 
 var result7 = MyGenericLinq.GenericWhere(drivers, x => x.Age > 33);
 ```
- 
+### Krok 6
+Czas na ostatni koncept języka C# stosowany w mechanizmie LINQ.  W klasach, które budowaliśmy do tej pory, nie operowaliśmy bezpośrednio na naszych kolekcjach a przekazywaliśmy je do osobnej klasy i metody jako parametr. Oryginalne LINQ tak nie wygląda. W jakiś magiczny sposób nasze kolekcje posiadają już metodę Where i inne metody LINQ.
+To w sumie nie żadna magia a metody rozszerzeń, czyli Extension Methods. Mechanizm na pewno pojawiający się we wszelkich kursach języka C#, ale w praktyce wcale nie używany na co dzień, więc może umknąć rzucanym na głęboką wodę juniorom.
+Utwórzmy ostatnią klasę myExtLinq, która będzie już zawierała tylko jedną metodę opartą na delegacie generycznym Func. Przed parametrem reprezentującym naszą wejściową generyczną kolekcję dodajmy słowo this. To sprawi, że będziemy bez odwoływania się do naszej klasy mogli operować tą metodą bezpośrednio na naszej kolekcji.
+ ```csharp
+ public static class MyExtLinq
+ {
+     public static IEnumerable<T> MyOwnWhere<T>(this IEnumerable<T> elements, Func<T,bool> func)
+     {
+         var resultList = new List<T>();
+         foreach (var element in elements)
+         {
+             if (func(element))
+             {
+                 resultList.Add(element);
+             }
+         }
+         return resultList;
+     }
+ }
+ ```
+ Na zakończenie jeszcze użycie metody z tej klasy bezpośrednio na naszych kolekcjach
+ ```csharp
+var result8 = drivers.MyOwnWhere(x => x.Age > 33);
+var result9 = invoices.MyOwnWhere(x => x.Value > 30);
+```
+
+
 
 
        
