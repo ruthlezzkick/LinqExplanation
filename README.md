@@ -229,6 +229,63 @@ Func<Invoice,bool> del5b = x => x.City == "Warszawa";
 var result5b = InvoiceLinq.WhereByFunc(invoices, del5b);
 ```   
 ### Krok 5
+Nasz klasa InvoiceLinq i jej metoda ( właściwie 2 podobne metody Where i WhereByFunc ) choć zyskały w pewnym sensie pewien uniwersalizm i mogą przyjmować w parametrze  dowolną metodę operująca na klasie Invoice i zwracającą wartość bool, to są ograniczone tylko do klasy Invoice.
+Dysponując kolekcjami innego typu, nic nam po tej klasie. Tutaj do gry wchodzą kolekcje i klasy generyczne. Pamiętamy, że utworzyliśmy sobie na początku zupełnie niezwiązaną z fakturami kolekcję kierowców. Możemy mieć też kolekcje jeszcze innych typów. Czy można przebudować naszą klasę InvoiceLinq, żeby mogła operować na kolekcjach dowolnego typu ? Tak.
+Taka klasa wyglądać by mogła tak jak niżej. Dodajmy ją do naszego projektu do folderu AltLinqu.
+```csharp
+public static class MyGenericLinq
+    {
+
+        public delegate bool GenericCheckIfConditionIsTrue<T>(T element);
+        //public Func<T,bool>
+
+        public static IEnumerable<T> GenericWhere<T>(IEnumerable<T> elements, GenericCheckIfConditionIsTrue<T> func)
+        {
+            var resultList = new List<T>();
+            foreach (var element in elements)
+            {
+                if (func(element))
+                {
+                    resultList.Add(element);
+                }
+            }
+            return resultList;
+        }
+
+        public static IEnumerable<T> GenericWhereByFunc<T>(IEnumerable<T> elements, Func<T,bool> func)
+        {
+            var resultList = new List<T>();
+            foreach (var element in elements)
+            {
+                if (func(element))
+                {
+                    resultList.Add(element);
+                }
+            }
+            return resultList;
+        }
+    }
+```
+Jak widać nie zwracają oni już kolekcji określonego typu Invoice a kolekcję typu generycznego, czyli bliżej nieokreślonego typu, który określiliśmy sobie zgodnie z konwencją literą T, ale równie dobrze mogłoby to być każde inne słowo.
+
+Podobnie przyjmowany parametr to już nie kolekcja faktur a kolekcja naszego typu generycznego T. Dlatego nadaliśmy jej już bardziej ogólną nazwę niż invoices. Elements wydaje się bardziej pasować do dowolnego bytu. W ciele naszych metod operujemy na elementach typu T, ale  jak widać konstrukcja jest bardzo podobna jak w metodach klasy InvoiceLinq.
+Przetestujmy naszą nową klasę i jej metody w naszej klasie Program, przy okazji jeszcze inaczej deklarując nasz delegat
+```csharp
+bool del6(Invoice x) => x.City == "Warszawa";
+var result6 = MyGenericLinq.GenericWhere<Invoice>(invoices, del6);
+```
+i wreszcie czas na finał tego punktu. Sprawdźmy czy nasza nowa klasa i jej metody, równie dobrze radzi sobie na kolekcjach innego typu.
+Już w formie jednej linii wyfiltrujmy kierowców z kolekcji drivers, którzy mają więcej niż 33 lata:
+```csharp
+var result7 = MyGenericLinq.GenericWhere<Driver>(drivers, x => x.Age > 33);
+```
+Wszystko działa świetnie. Dodam tylko, że w obu powyższych fragmentach kodu możemy nawet usunąć <Invoice> i <Drivers>. Kompilator poradzi sobie bez takiej jawnej deklaracji typu w naszej metodzie. Wie, że skoro przekazujemy do metody kolekcję typu Invoice to typem generycznym jest Invoice, a jeśli przekazujemy kolekcję typu Driver to typem jest Driver.
+```csharp
+var result6 = MyGenericLinq.GenericWhere(invoices, del6); 
+var result7 = MyGenericLinq.GenericWhere(drivers, x => x.Age > 33);
+```
+ 
+
 
        
 
