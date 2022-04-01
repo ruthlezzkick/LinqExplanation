@@ -279,7 +279,7 @@ Już w formie jednej linii wyfiltrujmy kierowców z kolekcji drivers, którzy ma
 ```csharp
 var result7 = MyGenericLinq.GenericWhere<Driver>(drivers, x => x.Age > 33);
 ```
-Wszystko działa świetnie. Dodam tylko, że w obu powyższych fragmentach kodu możemy nawet usunąć <Invoice> i <Drivers>. Kompilator poradzi sobie bez takiej jawnej deklaracji typu w naszej metodzie. Wie, że skoro przekazujemy do metody kolekcję typu Invoice to typem generycznym jest Invoice, a jeśli przekazujemy kolekcję typu Driver to typem jest Driver.
+Wszystko działa świetnie. Dodam tylko, że w obu powyższych fragmentach kodu możemy nawet usunąć "<Invoice>" i "<Driver>". Kompilator poradzi sobie bez takiej jawnej deklaracji typu w naszej metodzie. Wie, że skoro przekazujemy do metody kolekcję typu Invoice to typem generycznym jest Invoice, a jeśli przekazujemy kolekcję typu Driver to typem jest Driver.
 ```csharp
 var result6 = MyGenericLinq.GenericWhere(invoices, del6); 
 var result7 = MyGenericLinq.GenericWhere(drivers, x => x.Age > 33);
