@@ -180,7 +180,7 @@ var result2 = InvoiceLinq.Where(invoices, del2);
 Mam nadzieję , że idea delegat została już co nieco wyjaśniona. To w pewnym sensie wzorzec dla metody. Deklarując delegatę, mówimy, że pasuje do niej każda metoda, która daje wynik tego samego typu i przyjmuje parametry tego samego typu co nasz wzorzec.
 ### Krok 4
 Czas na wyrażenia Lambda.
-Weźmy na tapetę jedną z metod spełniającą regóły naszej delegaty, i pstarajmy się nieco ją uprościć
+Weźmy na tapetę jedną z metod spełniającą regóły naszej delegaty, i postarajmy się nieco ją uprościć
 ```csharp
 public static bool IsCityEqualWarszawa(Invoice invoice)
  {
