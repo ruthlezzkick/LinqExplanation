@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using LinqExplanation.AltLinq;
 using LinqExplanation.Domain;
@@ -94,11 +95,10 @@ namespace LinqExplanation
             Helper.WriteInvoicesDetails(result4);
 
             /* to samo dla delegata napisanego jako  lambda */
-            InvoiceLinq.CheckIfConditionIsTrue del5 = (Invoice invoice) =>
-            {
-                return (invoice.City == "Warszawa");
-            };
-            var result5 = InvoiceLinq.Where(invoices, del5);
+            InvoiceLinq.CheckIfConditionIsTrue del5a = x => x.City == "Warszawa";
+            var result5a = InvoiceLinq.Where(invoices, del5a);
+            Func<Invoice,bool> del5b = x => x.City == "Warszawa";
+            var result5b = InvoiceLinq.WhereByFunc(invoices, del5b);
 
             /*4. UŻYCIE DELEGAT w KLASACH GENERYCZNYCH */
             /* jeszcze jeden test stworzenia na szybko wyrażenia lambda, przypisanie go do zmiennej i użycie w metodzie*/
