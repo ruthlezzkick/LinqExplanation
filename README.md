@@ -12,7 +12,7 @@ invoices = GetAllInvoices();
 var filteredInvoices = invoices.Where(x=>x.InvoiceValue >2000);
 /* Proszęęęęę */
 ```
-  Proste. Większość początkujących developerów da sobie radę z tak postawionym problemem. Spora część z nich, wykona to jednak bezrefleksyjnie, nie dokońca rozumiejąc w pełni zastosowaną składnię.  Jak to się dzieje, że używamy jakiejś metody ‘Where’ na naszej liście faktur? Przecież nigdzie nie deklarowaliśmy jej na żadnej klasie. Co to za dziwna konstrukcja z tymi ‘x’ i jakimiś dziwnymi strzałkami ? Wiem, że tak to się robi, ale dlaczego, co tu się właściwie wydarzyło ?
+  Proste. Większość początkujących developerów da sobie radę z tak postawionym problemem. Spora część z nich, wykona to jednak bezrefleksyjnie, nie do końca rozumiejąc w pełni zastosowaną składnię.  Jak to się dzieje, że używamy jakiejś metody ‘Where’ na naszej liście faktur? Przecież nigdzie nie deklarowaliśmy jej na żadnej klasie. Co to za dziwna konstrukcja z tymi ‘x’ i jakimiś dziwnymi strzałkami ? Wiem, że tak to się robi, ale dlaczego, co tu się właściwie wydarzyło ?
   
   Przez to że LINQ jest tak powszechne i każdy programista .NET styka się z nim już na samym początku swojej drogi, jest to dobry element do wyjaśnienia pewnych konceptów, które podczas poznawania C# mogły zostać potraktowane trochę po macoszemu. Będą więc tutaj rozkminiane:
  -	Delegaty
@@ -34,7 +34,7 @@ var filteredInvoices = invoices.Where(x=>x.InvoiceValue >2000);
   
   - Folder Domain - zawiera przykładowe klasy naszych kolekcji
   - Klasa DomainFactory - to kreator przykładowych kolekcji tych klas
-  - Klasa Helper - to klasa, w której umieściliśmy kilka pomocniczych metod. Głównie do wyswietlania wyników w konsoli, ale też przykładowe metody zwracające wartość bool dla parametru Invoice
+  - Klasa Helper - to klasa, w której umieściliśmy kilka pomocniczych metod. Głównie do wyświetlania wyników w konsoli, ale też przykładowe metody zwracające wartość bool dla parametru Invoice
   - Klasa Program - tutaj odbywają się wszelkie testy budowanych mechanizmów
   - Folder AltLinq - tutaj stopniowo budujemy alternatywne wersje dla naszego LINQ
   
@@ -190,19 +190,19 @@ public static bool IsCityEqualWarszawa(Invoice invoice)
  }
 ```
 Po kolei:
-- zmieńmy ciało tej metody na ternary operator, a nastepnie upraszczając jeszcze bardziej, zostawmy to po prostu wyrażeniem logicznym
+- zmieńmy ciało tej metody na ternary operator, a następnie upraszczając jeszcze bardziej, zostawmy to po prostu wyrażeniem logicznym
 ```csharp
 return (invoice.City=="Warszawa") ? true: false
 ```
 ```csharp
 return invoice.City=="Warszawa"
 ```
-- zastapmy klamry strzałką =>
-- usuńmy kwantyfikator dostepu public i słowo static
+- zastąpmy klamry strzałką =>
+- usuńmy kwantyfikator dostępu public i słowo static
 - usuńmy słowo return
 - usuńmy typ i nazwę metody
 - usuńmy typ parametru Invoice
-- skóćmy nazwę zmiennej invoice np. do x
+- skróćmy nazwę zmiennej invoice np. do x
 - usuńmy nawiasy okalające parametr naszej metody
 W efekcie otrzymamy:
 ```csharp
@@ -227,7 +227,7 @@ Func<Invoice,bool> del5b = x => x.City == "Warszawa";
 var result5b = InvoiceLinq.WhereByFunc(invoices, del5b);
 ```   
 ### Krok 5
-Nasz klasa InvoiceLinq i jej metoda ( właściwie 2 podobne metody Where i WhereByFunc ) choć zyskały w pewnym sensie pewien uniwersalizm i mogą przyjmować w parametrze  dowolną metodę operująca na klasie Invoice i zwracającą wartość bool, to są ograniczone tylko do klasy Invoice.
+Nasza klasa InvoiceLinq i jej metoda ( właściwie 2 podobne metody Where i WhereByFunc ) choć zyskały w pewnym sensie pewien uniwersalizm i mogą przyjmować w parametrze  dowolną metodę operująca na klasie Invoice i zwracającą wartość bool, to są ograniczone tylko do klasy Invoice.
 Dysponując kolekcjami innego typu, nic nam po tej klasie. Tutaj do gry wchodzą kolekcje i klasy generyczne. Pamiętamy, że utworzyliśmy sobie na początku zupełnie niezwiązaną z fakturami kolekcję kierowców. Możemy mieć też kolekcje jeszcze innych typów. Czy można przebudować naszą klasę InvoiceLinq, żeby mogła operować na kolekcjach dowolnego typu ? Tak.
 Taka klasa wyglądać by mogła tak jak niżej. Dodajmy ją do naszego projektu do folderu AltLinqu.
 ```csharp
