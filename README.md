@@ -175,6 +175,27 @@ var result1 = InvoiceLinq.Where(invoices, del1);
 InvoiceLinq.CheckIfConditionIsTrue del2 = Helper.IsIdLessThanTree;
 var result2 = InvoiceLinq.Where(invoices, del2);
 ```
+Dla porządku implementacje tych metod w klasie Helper:
+```csharp
+public static bool IsCityEqualWarszawa(Invoice invoice)
+{
+    if (invoice.City == "Warszawa")
+    {
+        return true;
+    }
+    return false;
+}
+
+public static bool IsIdLessThanTree(Invoice invoice)
+{
+    if (invoice.Id < 3)
+    {
+        return true;
+    }
+    return false;
+}
+```
+
 Mam nadzieję , że idea delegat została już co nieco wyjaśniona. To w pewnym sensie wzorzec dla metody. Deklarując delegatę, mówimy, że pasuje do niej każda metoda, która daje wynik tego samego typu i przyjmuje parametry tego samego typu co nasz wzorzec.
 ### Krok 4
 Czas na wyrażenia Lambda.
