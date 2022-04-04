@@ -253,37 +253,37 @@ Dysponując kolekcjami innego typu, nic nam po tej klasie. Tutaj do gry wchodzą
 Taka klasa wyglądać by mogła tak jak niżej. Dodajmy ją do naszego projektu do folderu AltLinqu.
 ```csharp
 public static class MyGenericLinq
+{
+
+    public delegate bool GenericCheckIfConditionIsTrue<T>(T element);
+    //public Func<T,bool>
+
+    public static IEnumerable<T> GenericWhere<T>(IEnumerable<T> elements, GenericCheckIfConditionIsTrue<T> func)
     {
-
-        public delegate bool GenericCheckIfConditionIsTrue<T>(T element);
-        //public Func<T,bool>
-
-        public static IEnumerable<T> GenericWhere<T>(IEnumerable<T> elements, GenericCheckIfConditionIsTrue<T> func)
+        var resultList = new List<T>();
+        foreach (var element in elements)
         {
-            var resultList = new List<T>();
-            foreach (var element in elements)
+            if (func(element))
             {
-                if (func(element))
-                {
-                    resultList.Add(element);
-                }
+                resultList.Add(element);
             }
-            return resultList;
         }
-
-        public static IEnumerable<T> GenericWhereByFunc<T>(IEnumerable<T> elements, Func<T,bool> func)
-        {
-            var resultList = new List<T>();
-            foreach (var element in elements)
-            {
-                if (func(element))
-                {
-                    resultList.Add(element);
-                }
-            }
-            return resultList;
-        }
+        return resultList;
     }
+
+    public static IEnumerable<T> GenericWhereByFunc<T>(IEnumerable<T> elements, Func<T,bool> func)
+    {
+        var resultList = new List<T>();
+        foreach (var element in elements)
+        {
+            if (func(element))
+            {
+                resultList.Add(element);
+            }
+        }
+        return resultList;
+    }
+}
 ```
 Jak widać nie zwracają oni już kolekcji określonego typu Invoice a kolekcję typu generycznego, czyli bliżej nieokreślonego typu, który określiliśmy sobie zgodnie z konwencją literą T, ale równie dobrze mogłoby to być każde inne słowo.
 
