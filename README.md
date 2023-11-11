@@ -250,7 +250,7 @@ var result5b = InvoiceLinq.WhereByFunc(invoices, del5b);
 ### Krok 5
 Nasza klasa InvoiceLinq i jej metoda ( właściwie 2 podobne metody Where i WhereByFunc ) choć zyskały w pewnym sensie pewien uniwersalizm i mogą przyjmować w parametrze  dowolną metodę operująca na klasie Invoice i zwracającą wartość bool, to są ograniczone tylko do klasy Invoice.
 Dysponując kolekcjami innego typu, nic nam po tej klasie. Tutaj do gry wchodzą kolekcje i klasy generyczne. Pamiętamy, że utworzyliśmy sobie na początku zupełnie niezwiązaną z fakturami kolekcję kierowców. Możemy mieć też kolekcje jeszcze innych typów. Czy można przebudować naszą klasę InvoiceLinq, żeby mogła operować na kolekcjach dowolnego typu ? Tak.
-Taka klasa wyglądać by mogła tak jak niżej. Dodajmy ją do naszego projektu do folderu AltLinqu.
+Taka klasa wyglądać by mogła tak jak niżej. Dodajmy ją do naszego projektu do folderu AltLinq.
 ```csharp
 public static class MyGenericLinq
 {
